@@ -1,0 +1,64 @@
+from pulp import *
+
+prob = LpProblem("CaseStudy_2_Part3", LpMinimize)
+
+x1 = LpVariable('x1 Perfect', cat='Binary')
+x2 = LpVariable('x2 Burden', cat='Binary')
+x3 = LpVariable('x3 Equalizer', cat='Binary')
+x4 = LpVariable('x4 Chaos', cat='Binary')
+x5 = LpVariable('x5 Control', cat='Binary')
+x6 = LpVariable('x6 Domestic', cat='Binary')
+x7 = LpVariable('x7 Innocence', cat='Binary')
+x8 = LpVariable('x8 Aging', cat='Binary')
+x9 = LpVariable('x9 Wasted', cat='Binary')
+x10 = LpVariable('x10 Void', cat='Binary')
+x11 = LpVariable('x11 Sun', cat='Binary')
+x12 = LpVariable('x12 Beyond', cat='Binary')
+x13 = LpVariable('x13 Pioneers', cat='Binary')
+x14 = LpVariable('x14 Serenity', cat='Binary')
+x15 = LpVariable('x15 Calm', cat='Binary')
+x16 = LpVariable('x16 Storefront', cat='Binary')
+x17 = LpVariable('x17 Harley', cat='Binary')
+x18 = LpVariable('x18 Consum', cat='Binary')
+x19 = LpVariable('x19 Reflect', cat='Binary')
+x20 = LpVariable('x20 Trojan', cat='Binary')
+x21 = LpVariable('x21 Rick1', cat='Binary')
+x22 = LpVariable('x22 Rick2', cat='Binary')
+x23 = LpVariable('x23 Rick3', cat='Binary')
+x24 = LpVariable('x24 Wisdom', cat='Binary')
+x25 = LpVariable('x25 Superior', cat='Binary')
+x26 = LpVariable('x26 Living', cat='Binary')
+x27 = LpVariable('x27 Violin', cat='Binary')
+x28 = LpVariable('x28 FruitBowl', cat='Binary')
+x29 = LpVariable('x29 Namesake', cat='Binary')
+x30 = LpVariable('x30 Narcissism', cat='Binary')
+x31 = LpVariable('x31 Glitters', cat='Binary')
+x32 = LpVariable('x32 The Rock', cat='Binary')
+x33 = LpVariable('x33 Winding', cat='Binary')
+x34 = LpVariable('x34 Dreams', cat='Binary')
+
+# Objective function
+prob += 300*x1 + 250*x2 + 125*x3 + 400*x4 + 500*x5 + 400*x6 + 550*x7 + 700*x8 + 575*x9 + 150*x10 + \
+    150*x11 + 650*x12 + 650*x13 + 200*x14 + 225*x15 + 850*x16 + 750*x17 + 400*x18 + 175*x19 + 450*x20 + \
+    500*x21 + 500*x22 + 500*x23 + 250*x24 + 350*x25 + 450*x26 + 400*x27 + 400*x28 + 300*x29 + 300*x30 + \
+    50*x31 + 50*x33 + 50*x33 + 50*x34, "Obj"
+
+#Funding Constraint
+prob += x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15 + x16 + \
+x17 + x18 + x19 + x20 + x21 + x22 + x23 + x24 + x25 + x26 + x27 + x28 + x29 + x30 + x31 + x32 + x33 + x34 <= 4000, "Funding"
+
+#Influential Person's Constraint
+prob += x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15 + x16 + \
+x17 + x18 + x19 + x20 + x21 + x22 + x23 + x24 + x25 + x26 + x27 + x28 + x29 + x30 + x31 + x32 + \
+    x33 + x34 == 20, "Exactly 20"
+prob += x4 + x5 + x6 + x7 == 4, "All of Rita's Art"
+
+print(prob)
+
+prob.solve()
+print(LpStatus[prob.status])
+
+for variable in prob.variables():
+  print("{} = {}".format(variable.name, variable.varValue))
+
+print("Optimial Function Value = {}".format(value(prob.objective)))
